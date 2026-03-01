@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> My To-do List</title>
+    <title>To-do List</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00d4ff">
+    <meta name="theme-color" content="#ff7eb9">
     <style>
         :root {
-            --bg: #0f0f12;
-            --surface: #1c1c21;
-            --accent: #00d4ff; /* Neon Blue */
-            --danger: #ff0055; /* Power Red */
-            --text: #e0e0e0;
+            --bg: #fff0f6; 
+            --surface: #ffffff;
+            --accent: #ff7eb9; 
+            --accent-dark: #f06292;
+            --danger: #ff4d4d;
+            --text: #4a4a4a;
         }
 
         body {
             background-color: var(--bg);
+            background-image: radial-gradient(var(--accent) 0.5px, transparent 0.5px);
+            background-size: 20px 20px; 
             color: var(--text);
-            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -30,29 +33,24 @@
             background: var(--surface);
             width: 100%;
             max-width: 450px;
-            padding: 25px;
-            border-radius: 5px;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            border: 4px solid var(--accent);
+            box-shadow: 10px 10px 0px rgba(255, 126, 185, 0.2);
             position: relative;
-        }
-
-        /* Diagonal "manga" stripe effect */
-        .quest-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 5px;
-            background: linear-gradient(90deg, var(--accent), var(--danger));
+            align-self: flex-start;
+            margin-top: 50px;
         }
 
         h1 {
             text-align: center;
-            font-style: italic;
-            letter-spacing: 2px;
+            font-weight: 900;
+            letter-spacing: -1px;
             color: var(--accent);
+            margin-top: 0;
             margin-bottom: 30px;
             text-transform: uppercase;
+            font-size: 2rem;
         }
 
         .input-group {
@@ -63,64 +61,92 @@
 
         input {
             flex: 1;
-            background: #2a2a32;
-            border: 1px solid var(--accent);
-            color: white;
-            padding: 12px;
-            border-radius: 0;
+            background: #fff;
+            border: 2px solid var(--accent);
+            color: var(--text);
+            padding: 12px 15px;
+            border-radius: 12px;
             outline: none;
+            font-size: 16px;
+        }
+
+        input::placeholder {
+            color: #ffb3d1;
         }
 
         .btn-add {
             background: var(--accent);
-            color: black;
+            color: white;
             border: none;
-            padding: 0 20px;
+            padding: 0 25px;
             cursor: pointer;
             font-weight: bold;
-            text-transform: uppercase;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add:hover {
+            background: var(--accent-dark);
+            transform: scale(1.05);
         }
 
         ul { list-style: none; padding: 0; }
 
         li {
-            background: #25252b;
+            background: #fffafa;
             margin-bottom: 12px;
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-right: 4px solid var(--accent);
-            transition: 0.2s;
+            border: 2px solid #ffe3ed;
+            border-radius: 12px;
+            transition: 0.3s;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         li:hover {
-            transform: skewX(-2deg);
-            background: #2d2d35;
+            border-color: var(--accent);
+            transform: translateX(5px);
         }
 
-        .btn-del {
-            background: var(--danger);
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
+        
+        .btn-outline-danger {
+            background: white;
+            color: var(--danger);
+            border: 2px solid var(--danger);
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-outline-danger:hover {
+            background: var(--danger);
+            color: white;
         }
     </style>
 </head>
 <body>
 
     <div class="quest-card">
-        <h1>My Task</h1>
+        <h1>My Tasks</h1>
         <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Enter new quest...">
-            <button class="btn-add" onclick="addTask()">Deploy</button>
+            <input type="text" id="taskInput" placeholder="What's the plan?">
+            <button class="btn-add" onclick="addTask()">Add</button>
         </div>
         <ul id="taskList"></ul>
     </div>
+
 <script>
+    
     const taskList = document.getElementById("taskList");
 
       function addTask() {
@@ -155,7 +181,4 @@
       }
 </script>
 </body>
-
 </html>
-
-
